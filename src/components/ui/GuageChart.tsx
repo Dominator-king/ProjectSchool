@@ -47,7 +47,7 @@ export const GuageChart = ({
             {
               label: "Marks",
               data: [marks, 100 - marks],
-              backgroundColor: (context) => {
+              backgroundColor: (context): any => {
                 const chart = context.chart;
                 const { ctx, chartArea } = chart;
                 if (!chartArea) {
