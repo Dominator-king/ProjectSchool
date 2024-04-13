@@ -7,6 +7,16 @@ import { faUserGraduate } from "@fortawesome/free-solid-svg-icons/faUserGraduate
 import { GuageChart } from "@/components/ui/GuageChart";
 import { BarChartHorizontal } from "@/components/ui/BarChartHorizontal";
 import BarChartVertical from "@/components/ui/BarChartVertical";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
 export default function Home() {
   const mathAvg =
     students.map((student) => student.maths).reduce((a, b) => a + b, 0) /
@@ -23,6 +33,7 @@ export default function Home() {
   const femaleStudents = students.filter(
     (student) => student.gender === "female"
   );
+  const fiveStudents = students.slice(0, 8);
   const maleStudents = students.filter((student) => student.gender === "male");
   return (
     <div className=" m-6 shadow-xl p-6 grid  gap-4 lg:grid-rows-[150px_1fr] md:grid-cols-2 lg:grid-cols-4">
@@ -57,9 +68,36 @@ export default function Home() {
           <div className="text-2xl font-bold -mt-2">{students.length}</div>
         </CardContent>
       </Card>
-      <main className="md:col-span-2 shadow-lg lg:col-span-3 bg-slate-300 grid grid-cols-2 ">
-        <BarChartHorizontal />
-        <BarChartVertical />
+      <main className="md:col-span-2 shadow-lg lg:col-span-3 grid-rows-layout  grid grid-cols-2 ">
+        <BarChartHorizontal male={maleStudents} female={femaleStudents} />
+        <BarChartVertical male={maleStudents} female={femaleStudents} />
+        <div className="col-span-2">
+          <Table className="p-6">
+            <TableCaption>A list of your Students .</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Name</TableHead>
+                <TableHead>Gender</TableHead>
+                <TableHead>Maths</TableHead>
+                <TableHead>Chemisty</TableHead>
+                <TableHead>Physics</TableHead>
+                <TableHead>English</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody className="p-6">
+              {fiveStudents.map((student, i) => (
+                <TableRow key={i}>
+                  <TableCell className="font-medium">{student.name}</TableCell>
+                  <TableCell>{student.gender}</TableCell>
+                  <TableCell>{student.maths}</TableCell>
+                  <TableCell>{student.chemistry}</TableCell>
+                  <TableCell>{student.physics}</TableCell>
+                  <TableCell>{student.english}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </main>
       <div className=" shadow-xl m-6 lg:row-start-1 p-6 lg:row-end-3 ">
         <GuageChart type="Eng" marks={Number(mathAvg.toFixed(2))} />

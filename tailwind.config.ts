@@ -18,7 +18,7 @@ const config = {
       },
     },
     extend: {
-      gridTemplateRows: { layout: " 200px 1fr" },
+      gridTemplateRows: { layout: " 400px 1fr" },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
