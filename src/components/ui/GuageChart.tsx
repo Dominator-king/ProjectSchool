@@ -55,7 +55,7 @@ export const GuageChart = ({
                   return null;
                 }
                 if (context.dataIndex === 0) return getGradient(chart);
-                else return "white";
+                else return "lightGray";
               },
               borderWidth: 0,
               circumference: 260,
@@ -68,6 +68,11 @@ export const GuageChart = ({
         options={{
           maintainAspectRatio: true,
           plugins: {
+            tooltip: {
+              filter: function (tooltipItem) {
+                return tooltipItem.dataIndex === 0;
+              },
+            },
             legend: {
               display: false,
             },
