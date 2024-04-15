@@ -1,22 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { faPerson } from "@fortawesome/free-solid-svg-icons/faPerson";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { students } from "../../data";
+import { studentData as students } from "../../data";
 import { faPersonDress } from "@fortawesome/free-solid-svg-icons/faPersonDress";
 import { faUserGraduate } from "@fortawesome/free-solid-svg-icons/faUserGraduate";
 import { GuageChart } from "@/components/ui/GuageChart";
 import { BarChartHorizontal } from "@/components/ui/BarChartHorizontal";
 import BarChartVertical from "@/components/ui/BarChartVertical";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-
+import { columns } from "./columns";
+import { DataTable } from "./data-table";
 export default function Home() {
   const mathAvg =
     students.map((student) => student.maths).reduce((a, b) => a + b, 0) /
@@ -71,32 +63,8 @@ export default function Home() {
       <main className="md:col-span-2 shadow-lg lg:col-span-3 grid-rows-layout  grid grid-cols-2 ">
         <BarChartHorizontal male={maleStudents} female={femaleStudents} />
         <BarChartVertical male={maleStudents} female={femaleStudents} />
-        <div className="col-span-2">
-          <Table className="p-6">
-            <TableCaption>A list of your Students .</TableCaption>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Name</TableHead>
-                <TableHead>Gender</TableHead>
-                <TableHead>Maths</TableHead>
-                <TableHead>Chemisty</TableHead>
-                <TableHead>Physics</TableHead>
-                <TableHead>English</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody className="p-6">
-              {fiveStudents.map((student, i) => (
-                <TableRow key={i}>
-                  <TableCell className="font-medium">{student.name}</TableCell>
-                  <TableCell>{student.gender}</TableCell>
-                  <TableCell>{student.maths}</TableCell>
-                  <TableCell>{student.chemistry}</TableCell>
-                  <TableCell>{student.physics}</TableCell>
-                  <TableCell>{student.english}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+        <div className=" px-6 py-2 col-span-2">
+          <DataTable columns={columns} data={students} />
         </div>
       </main>
       <div className=" shadow-xl m-6 lg:row-start-1 p-6 lg:row-end-3 ">
