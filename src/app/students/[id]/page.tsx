@@ -32,7 +32,8 @@ async function updateData(formData: FormData) {
   // Save the new data to the database
   await fs.writeFile(
     "data.js",
-    `export const studentData = ${JSON.stringify(newStudentData)}`
+    `export const studentData = ${JSON.stringify(newStudentData)}`,
+    { flag: "w" }
   );
   // Redirect the user back to the homepage
   revalidatePath("/");
